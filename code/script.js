@@ -11,13 +11,14 @@ document.addEventListener('DOMContentLoaded', () => {
     showMessage(msg, 'bot');
   }
 
+
   const userReply = (msg) => {
     showMessage(msg, 'user');
   }
 
   // This function will add a chat bubble in the correct place based on who the sender is
   const showMessage = (message, sender) => {
-    
+
     if (sender === 'user') {
       chat.innerHTML += `
         <section class="user-msg">
@@ -43,17 +44,17 @@ document.addEventListener('DOMContentLoaded', () => {
   // This function will get the bot to progress the conversation
   const generateRequest = (message) => {
     console.log('questionNumber', questionNumber);
-    
+
     if (questionNumber === 1) {
-      setTimeout (() => showOptions(message), 1000);
+      setTimeout(() => showOptions(message), 1000);
     } else if (questionNumber === 2) {
-      setTimeout (() => passengers(message), 1000);
+      setTimeout(() => passengers(message), 1000);
     } else if (questionNumber === 3) {
-      setTimeout (() => addBaggage(message), 1000);
+      setTimeout(() => addBaggage(message), 1000);
     } else if (questionNumber === 4) {
-      setTimeout (() => confirmBooking(message), 1000);
+      setTimeout(() => confirmBooking(message), 1000);
     } else if (questionNumber === 5) {
-      setTimeout (() => goodbye(message), 1000);
+      setTimeout(() => goodbye(message), 1000);
     }
   }
 
@@ -65,16 +66,16 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // The function that makes the users name-response turn up
   const handleInput = (event) => {
-      event.preventDefault();
-      const reply = userInput.value;
-      userReply(reply);
-      userInput.value = '';
+    event.preventDefault();
+    const reply = userInput.value;
+    userReply(reply);
+    userInput.value = '';
 
-      if (reply !== '') {
-        setTimeout (() => showOptions(reply), 1000);
-      } else {
-        setTimeout (() => botReply('That is not a valid answer'), 300); 
-      }
+    if (reply !== '') {
+      setTimeout(() => showOptions(reply), 1000);
+    } else {
+      setTimeout(() => botReply('That is not a valid answer'), 300);
+    }
 
   }
 
@@ -83,32 +84,32 @@ document.addEventListener('DOMContentLoaded', () => {
     questionNumber++;
     botReply(`Hi ${message}, How would you like to travel?`);
 
-      inputWrapper.innerHTML = `
+    inputWrapper.innerHTML = `
         <button id='boatBtn'>Boat</button>
         <button id='busBtn'>Bus</button>
         <button id='trainBtn'>Train</button>
       `;
 
-      document.getElementById('boatBtn') .addEventListener('click', () => {
-        generateRequest('Boat');
-        userReply('Boat');
-      });
-      document.getElementById('busBtn') .addEventListener('click', () => {
-        generateRequest('Bus');
-        userReply('Bus');
-      });
-      document.getElementById('trainBtn') .addEventListener('click', () => {
-        generateRequest('Train');
-        userReply('Train');
-      });
+    document.getElementById('boatBtn').addEventListener('click', () => {
+      generateRequest('Boat');
+      userReply('Boat');
+    });
+    document.getElementById('busBtn').addEventListener('click', () => {
+      generateRequest('Bus');
+      userReply('Bus');
+    });
+    document.getElementById('trainBtn').addEventListener('click', () => {
+      generateRequest('Train');
+      userReply('Train');
+    });
   }
 
   // the bots second question; a list of numbers to choose from
   const passengers = (transport) => {
     questionNumber++;
     botReply(`${transport} you say, how fun! How many passengers will you be?`);
-      
-    inputWrapper.innerHTML =`
+
+    inputWrapper.innerHTML = `
       <select id='numberOfPassengers' onchange='changeFunc'>
         <option value='0'>0</option>
         <option value='1'>1</option>
@@ -117,7 +118,7 @@ document.addEventListener('DOMContentLoaded', () => {
       </select>
     `;
 
-    document.getElementById('numberOfPassengers') .onchange = () => {
+    document.getElementById('numberOfPassengers').onchange = () => {
       generateRequest(numberOfPassengers.value);
       userReply(numberOfPassengers.value);
     }
@@ -127,17 +128,17 @@ document.addEventListener('DOMContentLoaded', () => {
   const addBaggage = () => {
     questionNumber++;
     botReply(`A booking for ${numberOfPassengers.value} coming up! Would you like to add any baggage?`);
-    
+
     inputWrapper.innerHTML = `
       <button id='yesBaggage'>Yes</button>
       <button id='noBaggage'>No</button>
     `;
 
-    document.getElementById('yesBaggage') .addEventListener('click', () => {
+    document.getElementById('yesBaggage').addEventListener('click', () => {
       generateRequest('');
       userReply('Yes');
     });
-    document.getElementById('noBaggage') .addEventListener('click', () => {
+    document.getElementById('noBaggage').addEventListener('click', () => {
       generateRequest('');
       userReply('No');
     });
@@ -153,11 +154,11 @@ document.addEventListener('DOMContentLoaded', () => {
       <button id='restartBtn'>Restart</button>
     `;
 
-    document.getElementById('confirmBtn') .addEventListener('click', () => {
+    document.getElementById('confirmBtn').addEventListener('click', () => {
       generateRequest('');
       userReply('Confirm');
     });
-    document.getElementById('restartBtn') .addEventListener('click', () => {
+    document.getElementById('restartBtn').addEventListener('click', () => {
       location.reload();
     });
 
