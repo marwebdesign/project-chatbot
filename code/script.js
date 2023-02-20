@@ -5,6 +5,9 @@ document.addEventListener('DOMContentLoaded', () => {
   const userInput = document.getElementById('user-input');
   const form = document.getElementById('user-form');
   const inputWrapper = document.getElementById('input-wrapper');
+  const audio1 = document.getElementById('audio1');
+  const audio2 = document.getElementById('audio2');
+  const applause = document.getElementById('applause');
   let questionNumber = 1;
 
   const botReply = (msg) => {
@@ -66,6 +69,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // The function that makes the users name-response turn up
   const handleInput = (event) => {
+    audio1.play()
     event.preventDefault();
     const reply = userInput.value;
     userReply(reply);
@@ -76,7 +80,6 @@ document.addEventListener('DOMContentLoaded', () => {
     } else {
       setTimeout(() => botReply('That is not a valid answer'), 300);
     }
-
   }
 
   // the bots first question; a multiple choise question with three buttons with different alternatives
@@ -91,14 +94,17 @@ document.addEventListener('DOMContentLoaded', () => {
       `;
 
     document.getElementById('boatBtn').addEventListener('click', () => {
+      audio2.play()
       generateRequest('Boat');
       userReply('Boat');
     });
     document.getElementById('busBtn').addEventListener('click', () => {
+      audio2.play()
       generateRequest('Bus');
       userReply('Bus');
     });
     document.getElementById('trainBtn').addEventListener('click', () => {
+      audio2.play()
       generateRequest('Train');
       userReply('Train');
     });
@@ -119,6 +125,8 @@ document.addEventListener('DOMContentLoaded', () => {
     `;
 
     document.getElementById('numberOfPassengers').onchange = () => {
+      audio1.load();
+      audio1.play();
       generateRequest(numberOfPassengers.value);
       userReply(numberOfPassengers.value);
     }
@@ -135,10 +143,14 @@ document.addEventListener('DOMContentLoaded', () => {
     `;
 
     document.getElementById('yesBaggage').addEventListener('click', () => {
+      audio2.load();
+      audio2.play();
       generateRequest('');
       userReply('Yes');
     });
     document.getElementById('noBaggage').addEventListener('click', () => {
+      audio2.load();
+      audio2.play();
       generateRequest('');
       userReply('No');
     });
@@ -155,6 +167,8 @@ document.addEventListener('DOMContentLoaded', () => {
     `;
 
     document.getElementById('confirmBtn').addEventListener('click', () => {
+      audio1.load();
+      audio1.play();
       generateRequest('');
       userReply('Confirm');
     });
@@ -167,6 +181,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // the bots last comment if the user confirmed the booking
   const goodbye = () => {
+    applause.play()
     questionNumber++;
     botReply('Thank you for your booking!');
 
