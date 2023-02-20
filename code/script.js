@@ -127,7 +127,7 @@ document.addEventListener('DOMContentLoaded', () => {
   // the bots third question; a multiple choise question with 'yes'- and 'no'-button
   const addBaggage = () => {
     questionNumber++;
-    botReply(`A booking for ${numberOfPassengers.value} coming up! Would you like to add any baggage?`);
+    botReply(`A booking for ${numberOfPassengers.value} coming up! Would you like to add any luggage?`);
 
     inputWrapper.innerHTML = `
       <button id='yesBaggage'>Yes</button>
